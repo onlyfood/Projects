@@ -99,7 +99,22 @@ for itn in range(10):
         print(losses)
 
 
-# In[ ]:
+# In[ ]:#toeknizer exceptions
+import spacy
+from spacy.symbols import ORTH, LEMMA, POS, TAG
+
+nlp = spacy.load("en_core_web_md")
+doc = nlp(u"This is N.K")  
+print([w.text for w in doc])  
+
+special_case = [{ORTH: u"N.K", LEMMA: u"NewYork", POS: u"NOUN"}]
+nlp.tokenizer.add_special_case(u"gimme", special_case)
+
+
+print([w.text for w in nlp(u"N.K is messy")])  
+
+
+print([w.lemma_ for w in nlp(u"N.K is great")])  
 
 
 
